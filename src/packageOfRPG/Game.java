@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Game {
 
-	public static void main(String[] args) throws IOException {
+	public void play() throws IOException {
 		Map M;
 		Team ally;
 		Scanner scanner = new Scanner(System.in);
@@ -62,7 +62,6 @@ public class Game {
 				continue;
 			}
 			Team enemy = new Team(input);
-			show(ally, enemy);
 			if(battle(ally, enemy)) {
 				M.print();
 				continue;
@@ -72,12 +71,12 @@ public class Game {
 				return;
 			}
 		}
-		System.out.println(M.limit + "\n" + M.name);
+		System.out.println(M.name);
 		System.out.println("over");
 		scanner.close();
 	}
 
-	public static boolean select_mission(Map M, Team T) throws IOException {
+	public boolean select_mission(Map M, Team T) throws IOException {
 		while (true) {
 			System.out.println("輸入任務與編隊");
 			Scanner scanner = new Scanner(System.in);
@@ -108,7 +107,7 @@ public class Game {
 		}
 	}
 
-	public static boolean battle(Team ally, Team enemy) throws IOException {
+	public boolean battle(Team ally, Team enemy) throws IOException {
 		Scanner scanner = new Scanner(System.in);
 		while (true) {
 			if (enemy.number == 0) {
@@ -231,7 +230,7 @@ public class Game {
 		}
 	}
 
-	public static void show(Team ally, Team enemy) {
+	public void show(Team ally, Team enemy) {
 		for (int i = 4; i >= 0; i--) {
 			if (ally.members[i] == null) {
 				System.out.print("\t");
