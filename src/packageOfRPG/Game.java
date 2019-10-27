@@ -4,39 +4,14 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class Game {
+	
+	private Map M;
+	private Team ally;
+	private String input;
+	private Scanner scanner = new Scanner(System.in);
 
 	public void play() throws IOException {
-		Map M;
-		Team ally;
-		Scanner scanner = new Scanner(System.in);
-		String input;
-		while (true) {
-			System.out.println("輸入任務與編隊");
-			input = scanner.nextLine();
-			// scanner.close();
-			if (input.equals("exit")) {
-				// scanner.close();
-				return;
-			} else {
-				String[] tokens = input.split(" ");
-				if (tokens.length != 3 || !tokens[0].equals("select")) {
-					System.out.println("輸入錯誤");
-					continue;
-				} else {
-					// M = null;
-					// ally = null;
-					M = new Map(tokens[1]);
-					ally = new Team(tokens[2]);
-					if (M.limit == ally.number) {
-						// scanner.close();
-						break;
-					} else {
-						System.out.println("輸入錯誤");
-						continue;
-					}
-				}
-			}
-		}
+		select_mission();
 		M.print();
 		while (true) {
 			input = scanner.nextLine();
@@ -71,35 +46,28 @@ public class Game {
 				return;
 			}
 		}
-		System.out.println(M.name);
-		System.out.println("over");
+		System.out.println(M.name + ", over");
 		scanner.close();
 	}
 
-	public boolean select_mission(Map M, Team T) throws IOException {
+	public void select_mission() throws IOException {
 		while (true) {
 			System.out.println("輸入任務與編隊");
-			Scanner scanner = new Scanner(System.in);
-			String input = scanner.nextLine();
-			// scanner.close();
+			input = scanner.nextLine();
 			if (input.equals("exit")) {
-				scanner.close();
-				return true;
+				return;
 			} else {
 				String[] tokens = input.split(" ");
 				if (tokens.length != 3 || !tokens[0].equals("select")) {
-					System.out.println(tokens.length + tokens[0] + "輸入錯誤1");
+					System.out.println("輸入錯誤");
 					continue;
 				} else {
-					M = null;
-					T = null;
 					M = new Map(tokens[1]);
-					T = new Team(tokens[2]);
-					if (M.limit == T.number) {
-						scanner.close();
-						return false;
+					ally = new Team(tokens[2]);
+					if (M.limit == ally.number) {
+						break;
 					} else {
-						System.out.println("輸入錯誤2");
+						System.out.println("輸入錯誤");
 						continue;
 					}
 				}
@@ -108,17 +76,15 @@ public class Game {
 	}
 
 	public boolean battle(Team ally, Team enemy) throws IOException {
-		Scanner scanner = new Scanner(System.in);
+		//Scanner scanner = new Scanner(System.in);
 		while (true) {
 			if (enemy.number == 0) {
-				//scanner.close();
 				return true;
 			} else if (ally.number == 0) {
-				//scanner.close();
 				return false;
 			} else {
 				//Scanner scanner = new Scanner(System.in);
-				String input;
+				//String input;
 				show(ally, enemy);
 				for (int i = 0; i < ally.number; i++) {
 					if (ally.members[i].count % ally.members[i].turn == 0) {
@@ -212,9 +178,10 @@ public class Game {
 						}
 					}
 					ally.members[i].count++;
+					if (enemy.number == 0) {
+						return true;
+					}	
 				}
-
-				//scanner.close();
 				for (int i = 0; i < enemy.number; i++) {
 					if(enemy.members[i].iced == true) {
 						System.out.println(enemy.members[i].name + "被冰凍了無法行動");

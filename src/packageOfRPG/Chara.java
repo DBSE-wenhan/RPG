@@ -14,9 +14,9 @@ public abstract class Chara {
 		team.members[num] = this;
 		team.members[team.members[num].position] = temp;
 		System.out.println(name + "和" + team.members[num].name + "交換位置");
-		for(int i=0;i<3;i++) {
+		/*for(int i=0;i<3;i++) {
 			System.out.println(team.members[i].name);
-		}
+		}*/
 	}
 
 	public boolean command_test(int skill_type, Team team) {
@@ -51,7 +51,7 @@ public abstract class Chara {
 		if (mp_r > 0) {
 			mp = mp + mp_r;
 			if (mp > maxmp) {
-				System.out.println(name + "恢復" + (maxmp - mp - mp_r) + "點mp");
+				System.out.println(name + "恢復" + (mp_r - (mp - maxmp)) + "點mp");
 				mp = maxmp;
 			} else {
 				System.out.println(name + "恢復" + mp_r + "點mp");

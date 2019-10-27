@@ -46,7 +46,7 @@ public class M1 extends Melee {
 
 	protected void ridicule(Team ally) {
 		Chara temp = ally.members[ally.number - 1];
-		for (int i = ally.number - 1; i > 0; i++) {
+		for (int i = ally.number - 1; i > 0; i--) {
 			ally.members[i] = ally.members[i - 1];
 		}
 		ally.members[0] = temp;
