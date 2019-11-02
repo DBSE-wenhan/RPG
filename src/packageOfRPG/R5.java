@@ -18,19 +18,19 @@ public class R5 extends Chara {
 		position = -1;
 	}
 
-	public void normal(Team ally) {
+	public void normal(Team enemy) {
 		mp = mp - mp_costn;
-		System.out.println(name + "對" + ally.members[target].name + "使用" + skill_n);
-		ally.members[target].heal(20, 15);
+		System.out.println(name + "對" + self_team.members[target].name + "使用" + skill_n);
+		self_team.members[target].heal(20, 15);
 		target = -1;
 	}
 
-	public void special(Team ally) {
+	public void special(Team enemy) {
 		mp = mp - mp_costs;
 		System.out.println(name + "使用" + skill_s);
-		for (int i = 0; i < ally.number; i++) {
+		for (int i = 0; i < self_team.number; i++) {
 			if (i != position) {
-				ally.members[i].heal((int) (ally.members[i].maxhp * 0.5), 0);
+				self_team.members[i].heal((int) (self_team.members[i].maxhp * 0.5), 0);
 			}
 		}
 	}

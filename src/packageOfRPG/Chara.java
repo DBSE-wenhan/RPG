@@ -1,11 +1,14 @@
 package packageOfRPG;
 
+import java.util.Scanner;
+
 public abstract class Chara {
 	public int hp, maxhp, mp, maxmp, mp_costn, mp_costs;
 	public int turn, count, type, target, position;
 	public double buff = 1;
 	public String name, skill_n, skill_s;
 	public boolean iced = false, death = false;
+	public Team self_team;
 
 	public void exchange(int num, Team team) {
 		team.members[num].position = this.position;
@@ -14,9 +17,6 @@ public abstract class Chara {
 		team.members[num] = this;
 		team.members[team.members[num].position] = temp;
 		System.out.println(name + "和" + team.members[num].name + "交換位置");
-		/*for(int i=0;i<3;i++) {
-			System.out.println(team.members[i].name);
-		}*/
 	}
 
 	public boolean command_test(int skill_type, Team team) {
@@ -75,4 +75,9 @@ public abstract class Chara {
 			return false;
 		}
 	}
+
+	public boolean action(Team enemy, Scanner scanner) {
+		return true;
+	}
+
 }

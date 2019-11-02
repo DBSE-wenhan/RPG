@@ -6,7 +6,8 @@ import java.io.IOException;
 
 public class Map {
 	public String name;
-	public int limit, a1, b1, a2, b2;
+	public int limit, a2, b2;
+	private int now_x, now_y, goal_x, goal_y;
 	public char[][] map;
 
 	Map(String M) throws IOException {
@@ -40,12 +41,12 @@ public class Map {
 				} else if (token.equals("E")) {
 					map[i][j] = 'E';
 				} else if (token.equals("X")) {
-					a1 = i;
-					b1 = j;
+					now_y = i;
+					now_x = j;
 					map[i][j] = 'X';
 				} else if (token.equals("Y")) {
-					a2 = i;
-					b2 = j;
+					goal_y = i;
+					goal_x = j;
 					map[i][j] = 'Y';
 				} else {
 
@@ -84,15 +85,15 @@ public class Map {
 		} else {
 			return 'f';
 		}
-		if (a1 + a >= 0 && a1 + a < 10 && b1 + b >= 0 && b1 + b < 10) {
-			if (map[a1 + a][b1 + b] == '0') {
+		if (now_y + a >= 0 && now_y + a < 10 && now_x + b >= 0 && now_x + b < 10) {
+			if (map[now_y + a][now_x + b] == '0') {
 				return '0';
 			} else {
-				char temp = map[a1 + a][b1 + b];
-				map[a1][b1] = '1';
-				a1 = a1 + a;
-				b1 = b1 + b;
-				map[a1][b1] = 'X';
+				char temp = map[now_y + a][now_x + b];
+				map[now_y][now_x] = '1';
+				now_y = now_y + a;
+				now_x = now_x + b;
+				map[now_y][now_x] = 'X';
 				return temp;
 			}
 		} else {

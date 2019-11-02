@@ -75,16 +75,15 @@ public class Game {
 		}
 	}
 
+	
+	
 	public boolean battle(Team ally, Team enemy) throws IOException {
-		//Scanner scanner = new Scanner(System.in);
 		while (true) {
 			if (enemy.number == 0) {
 				return true;
 			} else if (ally.number == 0) {
 				return false;
 			} else {
-				//Scanner scanner = new Scanner(System.in);
-				//String input;
 				show(ally, enemy);
 				for (int i = 0; i < ally.number; i++) {
 					if (ally.members[i].count % ally.members[i].turn == 0) {
