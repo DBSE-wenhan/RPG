@@ -10,13 +10,13 @@ public abstract class Chara {
 	public boolean iced = false, death = false;
 	public Team self_team;
 
-	public void exchange(int num, Team team) {
-		team.members[num].position = this.position;
+	public void exchange(int num) {
+		self_team.members[num].position = this.position;
 		this.position = num;
-		Chara temp = team.members[num];
-		team.members[num] = this;
-		team.members[team.members[num].position] = temp;
-		System.out.println(name + "和" + team.members[num].name + "交換位置");
+		Chara temp = self_team.members[num];
+		self_team.members[num] = this;
+		self_team.members[self_team.members[num].position] = temp;
+		System.out.println(name + "和" + self_team.members[num].name + "交換位置");
 	}
 
 	public boolean command_test(int skill_type, Team team) {
@@ -76,8 +76,92 @@ public abstract class Chara {
 		}
 	}
 
-	public boolean action(Team enemy, Scanner scanner) {
-		return true;
+	public void user_action(Team enemy, Scanner scanner) {
+		String input;
+		while (true) {	
+			System.out.println("請選擇" + this.name + "的行動");
+			input = scanner.nextLine();
+			String[] tokens = input.split(" ");
+			int temp = 0;
+			if (tokens[0].equals("exchange")) {
+				if (tokens.length != 2) {
+					System.out.println("輸入錯誤");
+					continue;
+				} else if (tokens[1].equals("1")) {
+					temp = 4;
+				} else if (tokens[1].equals("2")) {
+					temp = 3;
+				} else if (tokens[1].equals("3")) {
+					temp = 2;
+				} else if (tokens[1].equals("4")) {
+					temp = 1;
+				} else if (tokens[1].equals("5")) {
+					temp = 0;
+				} else {
+					System.out.println("輸入錯誤");
+					continue;
+				}
+				this.exchange(temp);
+			} else if (tokens[0].equals("rest")) {
+				this.rest();
+			} else if (tokens[0].equals("normal")) {
+				if (this.command_test(1, enemy) == false) {
+					continue;
+				} else if (this.type == 4 || this.type == 5) {
+					if (tokens.length != 2) {
+						System.out.println("輸入錯誤");
+						continue;
+					} else if (tokens[1].equals("1") || tokens[1].equals("10")) {
+						temp = 4;
+					} else if (tokens[1].equals("2") || tokens[1].equals("9")) {
+						temp = 3;
+					} else if (tokens[1].equals("3") || tokens[1].equals("8")) {
+						temp = 2;
+					} else if (tokens[1].equals("4") || tokens[1].equals("7")) {
+						temp = 1;
+					} else if (tokens[1].equals("5") || tokens[1].equals("6")) {
+						temp = 0;
+					}
+					this.target = temp;
+					this.normal(enemy);
+				} else {
+					this.normal(enemy);
+				}
+			} else if (tokens[0].equals("special")) {
+				if (this.command_test(2, enemy) == false) {
+					continue;
+				} else if (this.type == 2) {
+					if (tokens.length != 2) {
+						System.out.println("輸入錯誤");
+						continue;
+					} else if (tokens[1].equals("10")) {
+						temp = 4;
+					} else if (tokens[1].equals("9")) {
+						temp = 3;
+					} else if (tokens[1].equals("8")) {
+						temp = 2;
+					} else if (tokens[1].equals("7")) {
+						temp = 1;
+					} else if (tokens[1].equals("6")) {
+						temp = 0;
+					}
+					this.target = temp;
+					if (((R2) (this)).command_test2(2, enemy) == false) {
+						continue;
+					} else {
+						this.special(enemy);
+					}
+				} else {
+					this.special(enemy);
+				}
+			} else {
+				System.out.println("輸入錯誤");
+				continue;
+			}
+			break;
+		}
+		this.count++;
 	}
 
+	//public void position_transfer
 }
