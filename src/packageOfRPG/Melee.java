@@ -3,7 +3,7 @@ package packageOfRPG;
 public abstract class Melee extends Chara {
 	protected int anger;
 
-	protected abstract void normal_detial(Team team);
+	//protected abstract void normal_detial(Team team);
 
 	public boolean command_test(int skill_type, Team team) {
 		int mp_cost;
@@ -40,11 +40,16 @@ public abstract class Melee extends Chara {
 		}
 	}
 
-	public void normal(Team team) {
-		normal_detial(team);
-		if (anger < 10) {
-			anger = anger + 1;
-			System.out.println(name + "怒氣+1");
+	public boolean normal(Team team) {
+		if(command_test(1, team)) {
+			normal_detial(team);
+			if (anger < 10) {
+				anger = anger + 1;
+				System.out.println(name + "怒氣+1");
+			}
+			return true;
+		}else {
+			return false;
 		}
 	}
 

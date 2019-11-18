@@ -22,13 +22,10 @@ public class M1 extends Melee {
 		mother = null;
 	}
 
-	protected void normal_detial(Team ally) {
+	public void special_detial(Team ally) {
 	}
 
-	public void special(Team ally) {
-	}
-
-	public void normal(Team ally) {
+	public void normal_detial(Team ally) {
 		int atk = (int) (10 * (buff + anger * 0.05));
 		System.out.println(name + "¹ï" + ally.members[ally.number - 1].name + "¨Ï¥Î" + skill_n);
 		ridicule(ally);

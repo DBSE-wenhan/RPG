@@ -18,7 +18,7 @@ public class R3 extends Chara {
 		position = -1;
 	}
 
-	public void normal(Team enemy) {
+	public void normal_detial(Team enemy) {
 		mp = mp - mp_costn;
 		int atk = (int) (30 * buff);
 		System.out.println(name + "使用" + skill_n);
@@ -33,7 +33,7 @@ public class R3 extends Chara {
 		}
 	}
 
-	public void special(Team enemy) {
+	public void special_detial(Team enemy) {
 		mp = mp - mp_costs;
 		int atk = (int) (25 * buff);
 		System.out.println(name + "使用" + skill_s);

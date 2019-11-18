@@ -19,7 +19,7 @@ public class R1 extends Melee {
 		position = -1;
 	}
 
-	protected void normal_detial(Team enemy) {
+	public void normal_detial(Team enemy) {
 		mp = mp - mp_costn;
 		int atk = (int) (15 * (buff + anger * 0.05));
 		System.out.println(name + "對" + enemy.members[0].name + "使用" + skill_n);
@@ -28,7 +28,7 @@ public class R1 extends Melee {
 		}
 	}
 
-	public void special(Team enemy) {
+	public void special_detial(Team enemy) {
 		mp = mp - mp_costs;
 		int atk = (int) (25 * (buff + anger * 0.05));
 		System.out.println(name + "使用" + skill_s);

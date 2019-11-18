@@ -18,10 +18,10 @@ public class M2 extends Chara {
 		position = -1;
 	}
 
-	public void special(Team ally) {
+	public void special_detial(Team ally) {
 	}
 
-	public void normal(Team ally) {
+	public void normal_detial(Team ally) {
 		int atk = (int) (15 * (buff * 0.05));
 		int hp_r = 0;
 		System.out.println(name + "使用" + skill_n);

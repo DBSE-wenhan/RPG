@@ -34,9 +34,27 @@ public abstract class Chara {
 		}
 	}
 
-	public abstract void normal(Team team);
+	public boolean normal(Team team) {
+		if(command_test(1, team)) {
+			normal_detial(team);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public abstract void normal_detial(Team team);
 
-	public abstract void special(Team team);
+	public boolean special(Team team) {
+		if(command_test(2, team)) {
+			special_detial(team);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public abstract void special_detial(Team team);
 
 	public void heal(int hp_r, int mp_r) {
 		if (hp_r > 0) {
@@ -105,9 +123,7 @@ public abstract class Chara {
 			} else if (tokens[0].equals("rest")) {
 				this.rest();
 			} else if (tokens[0].equals("normal")) {
-				if (this.command_test(1, enemy) == false) {
-					continue;
-				} else if (this.type == 4 || this.type == 5) {
+				if (this.type == 4 || this.type == 5) {
 					if (tokens.length != 2) {
 						System.out.println("輸入錯誤");
 						continue;
@@ -123,14 +139,16 @@ public abstract class Chara {
 						temp = 0;
 					}
 					this.target = temp;
-					this.normal(enemy);
+					if(!this.normal(enemy)) {
+						continue;
+					}
 				} else {
-					this.normal(enemy);
+					if(!this.normal(enemy)) {
+						continue;
+					}
 				}
 			} else if (tokens[0].equals("special")) {
-				if (this.command_test(2, enemy) == false) {
-					continue;
-				} else if (this.type == 2) {
+				if (this.type == 2) {
 					if (tokens.length != 2) {
 						System.out.println("輸入錯誤");
 						continue;
@@ -146,13 +164,13 @@ public abstract class Chara {
 						temp = 0;
 					}
 					this.target = temp;
-					if (((R2) (this)).command_test2(2, enemy) == false) {
+					if(!this.special(enemy)) {
 						continue;
-					} else {
-						this.special(enemy);
 					}
 				} else {
-					this.special(enemy);
+					if(!this.special(enemy)) {
+						continue;
+					}
 				}
 			} else {
 				System.out.println("輸入錯誤");
@@ -163,5 +181,9 @@ public abstract class Chara {
 		this.count++;
 	}
 
+	public void input_transfer() {
+		
+	}
+	
 	//public void position_transfer
 }

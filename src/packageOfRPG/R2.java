@@ -19,7 +19,7 @@ public class R2 extends Melee {
 		position = -1;
 	}
 
-	public boolean command_test2(int skill_type, Team enemy) {
+	public boolean command_test(int skill_type, Team enemy) {
 		int mp_cost;
 		if (skill_type == 1) {
 			mp_cost = mp_costn;
@@ -35,17 +35,17 @@ public class R2 extends Melee {
 			System.out.println("MP不足");
 			target = -1;
 			return false;
-		} else {
+		} else if(skill_type == 2) {
 			if (enemy.members[target].hp >= enemy.members[target].maxhp * 0.4 && skill_type == 2) {
 				System.out.println("目標血量超過40%");
 				target = -1;
 				return false;
 			}
-			return true;
 		}
+		return true;
 	}
 
-	protected void normal_detial(Team enemy) {
+	public void normal_detial(Team enemy) {
 		mp = mp - mp_costn;
 		int atk = (int) (20 * (buff + anger * 0.05));
 		System.out.println(name + "對" + enemy.members[enemy.number - 1].name + "使用" + skill_n);
@@ -54,7 +54,7 @@ public class R2 extends Melee {
 		}
 	}
 
-	public void special(Team enemy) {
+	public void special_detial(Team enemy) {
 		mp = mp - mp_costs;
 		System.out.println(name + "對" + enemy.members[target].name + "使用" + skill_s);
 		if (enemy.members[target].damage(enemy.members[target].hp)) {

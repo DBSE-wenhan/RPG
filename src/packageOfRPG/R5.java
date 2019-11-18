@@ -18,14 +18,14 @@ public class R5 extends Chara {
 		position = -1;
 	}
 
-	public void normal(Team enemy) {
+	public void normal_detial(Team enemy) {
 		mp = mp - mp_costn;
 		System.out.println(name + "對" + self_team.members[target].name + "使用" + skill_n);
 		self_team.members[target].heal(20, 15);
 		target = -1;
 	}
 
-	public void special(Team enemy) {
+	public void special_detial(Team enemy) {
 		mp = mp - mp_costs;
 		System.out.println(name + "使用" + skill_s);
 		for (int i = 0; i < self_team.number; i++) {

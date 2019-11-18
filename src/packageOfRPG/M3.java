@@ -18,10 +18,10 @@ public class M3 extends Chara {
 		position = -1;
 	}
 
-	public void special(Team enemy) {
+	public void special_detial(Team enemy) {
 	}
 
-	public void normal(Team enemy) {
+	public void normal_detial(Team enemy) {
 		boolean success = true;
 		System.out.println(name + "¨Ï¥Î" + skill_n);
 		if (enemy.number >= 5) {

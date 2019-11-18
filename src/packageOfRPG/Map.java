@@ -10,53 +10,57 @@ public class Map {
 	private int now_x, now_y, goal_x, goal_y;
 	public char[][] map;
 
-	Map(String M) throws IOException {
+	Map(String M) {
 		if (M.equals("0")) {
 			return;
 		}
 		map = new char[10][10];
 		String s;
-		FileReader fr = new FileReader(M + ".txt");
-		BufferedReader br = new BufferedReader(fr);
-		name = br.readLine();
-		limit = br.read() - 48;
-		s = br.readLine();//處理換行
-		int i = 0, j = 0;
-		while (br.ready()) {
-			s = br.readLine();
-			String[] tokens = s.split(",");
-			for (String token : tokens) {
-				if (token.equals("0")) {
-					map[i][j] = '0';
-				} else if (token.equals("1")) {
-					map[i][j] = '1';
-				} else if (token.equals("A")) {
-					map[i][j] = 'A';
-				} else if (token.equals("B")) {
-					map[i][j] = 'B';
-				} else if (token.equals("C")) {
-					map[i][j] = 'C';
-				} else if (token.equals("D")) {
-					map[i][j] = 'D';
-				} else if (token.equals("E")) {
-					map[i][j] = 'E';
-				} else if (token.equals("X")) {
-					now_y = i;
-					now_x = j;
-					map[i][j] = 'X';
-				} else if (token.equals("Y")) {
-					goal_y = i;
-					goal_x = j;
-					map[i][j] = 'Y';
-				} else {
+		try {
+			FileReader fr = new FileReader(M + ".txt");
+			BufferedReader br = new BufferedReader(fr);
+			name = br.readLine();
+			limit = br.read() - 48;
+			s = br.readLine();//處理換行
+			int i = 0, j = 0;
+			while (br.ready()) {
+				s = br.readLine();
+				String[] tokens = s.split(",");
+				for (String token : tokens) {
+					if (token.equals("0")) {
+						map[i][j] = '0';
+					} else if (token.equals("1")) {
+						map[i][j] = '1';
+					} else if (token.equals("A")) {
+						map[i][j] = 'A';
+					} else if (token.equals("B")) {
+						map[i][j] = 'B';
+					} else if (token.equals("C")) {
+						map[i][j] = 'C';
+					} else if (token.equals("D")) {
+						map[i][j] = 'D';
+					} else if (token.equals("E")) {
+						map[i][j] = 'E';
+					} else if (token.equals("X")) {
+						now_y = i;
+						now_x = j;
+						map[i][j] = 'X';
+					} else if (token.equals("Y")) {
+						goal_y = i;
+						goal_x = j;
+						map[i][j] = 'Y';
+					} else {
 
+					}
+					j++;
 				}
-				j++;
+				j = 0;
+				i++;
 			}
-			j = 0;
-			i++;
+			fr.close();
+		}catch(IOException e) {
+			System.out.print("File not found.");
 		}
-		fr.close();
 	}
 
 	public void print() {

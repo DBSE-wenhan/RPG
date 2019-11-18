@@ -1,7 +1,6 @@
 package packageOfRPG;
 
 import java.util.Scanner;
-import java.io.IOException;
 
 public class Game {
 	
@@ -10,7 +9,7 @@ public class Game {
 	private String input;
 	private Scanner scanner = new Scanner(System.in);
 
-	public void play() throws IOException {
+	public void play() {
 		select_mission();
 		M.print();
 		while (true) {
@@ -50,7 +49,7 @@ public class Game {
 		scanner.close();
 	}
 
-	public void select_mission() throws IOException {
+	public void select_mission() {
 		while (true) {
 			System.out.println("輸入任務與編隊");
 			input = scanner.nextLine();
@@ -75,7 +74,7 @@ public class Game {
 		}
 	}
 
-	public boolean battle(Team ally, Team enemy) throws IOException {
+	public boolean battle(Team ally, Team enemy) {
 		while (true) {
 			if (enemy.number == 0) {
 				return true;
