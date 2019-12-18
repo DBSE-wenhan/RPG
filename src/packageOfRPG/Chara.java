@@ -100,77 +100,37 @@ public abstract class Chara {
 			System.out.println("請選擇" + this.name + "的行動");
 			input = scanner.nextLine();
 			String[] tokens = input.split(" ");
-			int temp = 0;
-			if (tokens[0].equals("exchange")) {
-				if (tokens.length != 2) {
-					System.out.println("輸入錯誤");
-					continue;
-				} else if (tokens[1].equals("1")) {
-					temp = 4;
-				} else if (tokens[1].equals("2")) {
-					temp = 3;
-				} else if (tokens[1].equals("3")) {
-					temp = 2;
-				} else if (tokens[1].equals("4")) {
-					temp = 1;
-				} else if (tokens[1].equals("5")) {
-					temp = 0;
-				} else {
-					System.out.println("輸入錯誤");
-					continue;
+			int action_target = -1;
+			///input 長度檢查
+			if(tokens.length == 2) {
+				if (tokens[1].equals("1") || tokens[1].equals("10")) {
+					action_target = 4;
+				} else if (tokens[1].equals("2") || tokens[1].equals("9")) {
+					action_target = 3;
+				} else if (tokens[1].equals("3") || tokens[1].equals("8")) {
+					action_target = 2;
+				} else if (tokens[1].equals("4") || tokens[1].equals("7")) {
+					action_target = 1;
+				} else if (tokens[1].equals("5") || tokens[1].equals("6")) {
+					action_target = 0;
 				}
-				this.exchange(temp);
+				this.target = action_target;
+			}else if(tokens.length > 2) {
+				System.out.println("輸入錯誤");
+				continue;
+			}
+			///input 種類檢查
+			if (tokens[0].equals("exchange")) {
+				this.exchange(action_target);
 			} else if (tokens[0].equals("rest")) {
 				this.rest();
 			} else if (tokens[0].equals("normal")) {
-				if (this.type == 4 || this.type == 5) {
-					if (tokens.length != 2) {
-						System.out.println("輸入錯誤");
-						continue;
-					} else if (tokens[1].equals("1") || tokens[1].equals("10")) {
-						temp = 4;
-					} else if (tokens[1].equals("2") || tokens[1].equals("9")) {
-						temp = 3;
-					} else if (tokens[1].equals("3") || tokens[1].equals("8")) {
-						temp = 2;
-					} else if (tokens[1].equals("4") || tokens[1].equals("7")) {
-						temp = 1;
-					} else if (tokens[1].equals("5") || tokens[1].equals("6")) {
-						temp = 0;
-					}
-					this.target = temp;
-					if(!this.normal(enemy)) {
-						continue;
-					}
-				} else {
-					if(!this.normal(enemy)) {
-						continue;
-					}
+				if(!this.normal(enemy)) {
+					continue;
 				}
 			} else if (tokens[0].equals("special")) {
-				if (this.type == 2) {
-					if (tokens.length != 2) {
-						System.out.println("輸入錯誤");
-						continue;
-					} else if (tokens[1].equals("10")) {
-						temp = 4;
-					} else if (tokens[1].equals("9")) {
-						temp = 3;
-					} else if (tokens[1].equals("8")) {
-						temp = 2;
-					} else if (tokens[1].equals("7")) {
-						temp = 1;
-					} else if (tokens[1].equals("6")) {
-						temp = 0;
-					}
-					this.target = temp;
-					if(!this.special(enemy)) {
-						continue;
-					}
-				} else {
-					if(!this.special(enemy)) {
-						continue;
-					}
+				if(!this.special(enemy)) {
+					continue;
 				}
 			} else {
 				System.out.println("輸入錯誤");
