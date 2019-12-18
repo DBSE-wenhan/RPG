@@ -17,6 +17,15 @@ public class R4 extends Chara {
 		target = -1;
 		position = -1;
 	}
+	
+	public boolean normal(Team team, int input_str_num) {
+		if(command_test(1, team) && input_str_num == 2) {
+			normal_detial(team);
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 	public void normal_detial(Team enemy) {
 		mp = mp - mp_costn;

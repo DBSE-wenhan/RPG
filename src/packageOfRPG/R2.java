@@ -45,6 +45,15 @@ public class R2 extends Melee {
 		return true;
 	}
 
+	public boolean special(Team team, int input_str_num) {
+		if(command_test(2, team) && input_str_num == 2) {
+			special_detial(team);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	public void normal_detial(Team enemy) {
 		mp = mp - mp_costn;
 		int atk = (int) (20 * (buff + anger * 0.05));

@@ -84,7 +84,7 @@ public class Team {
 				continue;
 			}
 			else if (members[i].count % members[i].turn == 0) {
-				members[i].normal(ally);
+				members[i].normal(ally, 1);
 			}
 			members[i].count++;
 		}

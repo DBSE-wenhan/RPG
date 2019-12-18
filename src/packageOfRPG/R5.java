@@ -18,6 +18,15 @@ public class R5 extends Chara {
 		position = -1;
 	}
 
+	public boolean normal(Team team, int input_str_num) {
+		if(command_test(1, team) && input_str_num == 2) {
+			normal_detial(team);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	public void normal_detial(Team enemy) {
 		mp = mp - mp_costn;
 		System.out.println(name + "對" + self_team.members[target].name + "使用" + skill_n);

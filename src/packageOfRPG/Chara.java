@@ -34,8 +34,8 @@ public abstract class Chara {
 		}
 	}
 
-	public boolean normal(Team team) {
-		if(command_test(1, team)) {
+	public boolean normal(Team team, int input_str_num) {
+		if(command_test(1, team) && input_str_num == 1) {
 			normal_detial(team);
 			return true;
 		}else {
@@ -45,8 +45,8 @@ public abstract class Chara {
 	
 	public abstract void normal_detial(Team team);
 
-	public boolean special(Team team) {
-		if(command_test(2, team)) {
+	public boolean special(Team team, int input_str_num) {
+		if(command_test(2, team) && input_str_num == 1) {
 			special_detial(team);
 			return true;
 		}else {
@@ -101,7 +101,7 @@ public abstract class Chara {
 			input = scanner.nextLine();
 			String[] tokens = input.split(" ");
 			int action_target = -1;
-			///input 長度檢查
+			///input 長度檢查 (目前：強制修正敵我)
 			if(tokens.length == 2) {
 				if (tokens[1].equals("1") || tokens[1].equals("10")) {
 					action_target = 4;
@@ -113,6 +113,9 @@ public abstract class Chara {
 					action_target = 1;
 				} else if (tokens[1].equals("5") || tokens[1].equals("6")) {
 					action_target = 0;
+				} else {
+					System.out.println("輸入錯誤");
+					continue;
 				}
 				this.target = action_target;
 			}else if(tokens.length > 2) {
@@ -125,11 +128,11 @@ public abstract class Chara {
 			} else if (tokens[0].equals("rest")) {
 				this.rest();
 			} else if (tokens[0].equals("normal")) {
-				if(!this.normal(enemy)) {
+				if(!this.normal(enemy, tokens.length)) {
 					continue;
 				}
 			} else if (tokens[0].equals("special")) {
-				if(!this.special(enemy)) {
+				if(!this.special(enemy, tokens.length)) {
 					continue;
 				}
 			} else {
