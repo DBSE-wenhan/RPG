@@ -123,16 +123,18 @@ public abstract class Chara {
 				continue;
 			}
 			///input 種類檢查
-			if (tokens[0].equals("exchange")) {
+			if (tokens[0].equals("exchange") && tokens.length == 2) {
 				this.exchange(action_target);
-			} else if (tokens[0].equals("rest")) {
+			} else if (tokens[0].equals("rest") && tokens.length == 1) {
 				this.rest();
 			} else if (tokens[0].equals("normal")) {
 				if(!this.normal(enemy, tokens.length)) {
+					System.out.println("輸入錯誤");
 					continue;
 				}
 			} else if (tokens[0].equals("special")) {
 				if(!this.special(enemy, tokens.length)) {
+					System.out.println("輸入錯誤");
 					continue;
 				}
 			} else {

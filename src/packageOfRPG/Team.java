@@ -73,6 +73,7 @@ public class Team {
 					return;
 				}
 			}
+			members[i].count++;
 		}
 	}
 
