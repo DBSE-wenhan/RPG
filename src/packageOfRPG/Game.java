@@ -1,5 +1,6 @@
 package packageOfRPG;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Game {
@@ -14,26 +15,20 @@ public class Game {
 		M.print();
 		while (true) {
 			input = scanner.nextLine();
-			char c = M.move(input);
-			if (c == '0' || c == '1') {
+			String next_step = M.move(input);
+			if (next_step.equals("0") || next_step.equals("1")) {
+				///撞牆or繼續走
 				M.print();
 				continue;
-			} else if (c == 'A') {
-				input = "M1";
-				//////////////////
-			} else if (c == 'B') {
-				input = "M1,M1,M2";
-			} else if (c == 'C') {
-				input = "M1,M1,M2,M3";
-			} else if (c == 'D') {
-				input = "M1,M1,M3,M3";
-			} else if (c == 'E') {
-				input = "M1,M1,M2,M2,M3";
-			} else if (c == 'Y') {
+			} else if (next_step.equals("Y")) {
+				///終點
 				break;
-			} else if (c == 'f') {
+			} else if (next_step.equals("f")) {
+				///錯誤的輸入
 				System.out.println("輸入錯誤");
 				continue;
+			} else {
+				input = next_step;
 			}
 			Team enemy = new Team(input);
 			if(battle(ally, enemy)) {
@@ -61,12 +56,18 @@ public class Game {
 					System.out.println("輸入錯誤");
 					continue;
 				} else {
-					M = new Map(tokens[1]);
+					try {
+						M = new Map(tokens[1]);
+					}catch(IOException e) {
+						System.out.println("找不到該任務");
+						continue;
+					}
+					
 					ally = new Team(tokens[2]);
 					if (M.limit == ally.number) {
 						break;
 					} else {
-						System.out.println("輸入錯誤");
+						System.out.println("輸入人數錯誤");
 						continue;
 					}
 				}
