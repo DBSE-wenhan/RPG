@@ -91,22 +91,10 @@ public class Game {
 
 	public void show(Team ally, Team enemy) {
 		for (int i = 4; i >= 0; i--) {
-			if (ally.members[i] == null) {
-				System.out.print("\t");
-			} else if (ally.members[i].death) {
-				System.out.print("\t");
-			} else {
-				System.out.print(ally.members[i].name + "\t");
-			}
+			System.out.print(ally.show(i));
 		}
 		for (int i = 0; i < enemy.number; i++) {
-			if (enemy.members[i] == null) {
-				System.out.print("\t");
-			} else if (enemy.members[i].death) {
-				System.out.print("\t");
-			} else {
-				System.out.print(enemy.members[i].name + "\t");
-			}
+			System.out.print(enemy.show(i));
 		}
 		System.out.println("\n1\t2\t3\t4\t5\t6\t7\t8\t9\t10");
 	}

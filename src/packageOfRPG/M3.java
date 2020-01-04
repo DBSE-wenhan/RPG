@@ -18,18 +18,18 @@ public class M3 extends Chara {
 		position = -1;
 	}
 
-	public void special_detial(Team enemy) {
+	public void special_detial(Team ally) {
 	}
 
-	public void normal_detial(Team enemy) {
+	public void normal_detial(Team ally) {
 		boolean success = true;
 		System.out.println(name + "使用" + skill_n);
-		if (enemy.number >= 5) {
+		if (self_team.number >= 5) {
 			success = false;
 		} else {
-			for (int i = 0; i < enemy.number; i++) {
-				if (enemy.members[i].type == 6) {
-					if (((M1) (enemy.members[i])).mother == this) {
+			for (int i = 0; i < self_team.number; i++) {
+				if (self_team.members[i].type == 6) {
+					if (((M1) (self_team.members[i])).mother == this) {
 						success = false;
 						break;
 					}
@@ -37,10 +37,10 @@ public class M3 extends Chara {
 			}
 		}
 		if (success) {
-			enemy.members[enemy.number] = new M1();
-			enemy.members[enemy.number].count = 0;
-			((M1) (enemy.members[enemy.number])).mother = this;
-			enemy.number++;
+			self_team.members[self_team.number] = new M1();
+			self_team.members[self_team.number].count = 0;
+			((M1) (self_team.members[self_team.number])).mother = this;
+			self_team.number++;
 		} else {
 			System.out.println(skill_n + "失敗了");
 		}

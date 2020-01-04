@@ -90,4 +90,15 @@ public class Team {
 			members[i].count++;
 		}
 	}
+	
+	public String show(int member_num) {
+		if (this.members[member_num] == null) {
+			return ("\t");
+		} else if (this.members[member_num].death) {
+			return ("\t");
+		} else {
+			return (this.members[member_num].name + "\t");
+		}
+	}
+	
 }
